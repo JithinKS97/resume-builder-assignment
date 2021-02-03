@@ -10,17 +10,23 @@ export default (props) => {
     router.push(`/?index=${index}&&edit=true`)
   }
 
+  const handleViewClick = (index) => {
+    router.push(`/view?index=${index}`)
+  }
+
   return (
     <>
       <style>{style}</style>
       <Layout>
+        {resumes.length===0?<h2>No resumes added</h2>:null}
         {resumes.map((resume, index) => (
           <Card className="resume-tile-card">
             <CardBody className="list">
               <div>{resume.title}</div>
               <div>
-                <Button onClick={()=>handleEditClick(index)}>Edit</Button>
-                <Button color="danger" className="delete-button">
+                <Button onClick={()=>handleViewClick(index)}>View</Button>
+                <Button className="button" onClick={()=>handleEditClick(index)}>Edit</Button>
+                <Button color="danger" className="button">
                   X
                 </Button>
               </div>
@@ -38,7 +44,7 @@ const style = `
         flex-direction:row;
         justify-content:space-between;
     }
-    .delete-button {
+    .button {
         margin-left:10px;
     }
     .resume-tile-card {

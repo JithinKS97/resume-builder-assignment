@@ -12,8 +12,6 @@ export default (props) => {
   const [skills, setSkills] = useState([])
 
   useEffect(()=>{
-    console.log("asdads")
-    console.log(resume)
     if(resume) {
       setPersonalInfo(resume.personalInfo)
       setEducationExperienceList(resume.educationExperienceList)
