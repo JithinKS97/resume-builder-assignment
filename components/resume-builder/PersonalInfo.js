@@ -1,4 +1,4 @@
-import { FormGroup, Label, Input, Card, CardBody, CardTitle } from "reactstrap";
+import { FormGroup, Label, Input, Card, CardBody } from "reactstrap";
 
 export default (props) => {
   const { personalInfo, onChange } = props;
@@ -25,7 +25,7 @@ export default (props) => {
             <Label for="exampleEmail">Email</Label>
             <Input
               onChange={handleFieldChange}
-              value="email"
+              name="email"
               value={email}
               type="email"
             />
@@ -34,7 +34,7 @@ export default (props) => {
             <Label placeholder="Address">Address</Label>
             <Input
               onChange={handleFieldChange}
-              address="address"
+              name="address"
               value={address}
               type="textarea"
             />

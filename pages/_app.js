@@ -1,14 +1,15 @@
-import 'bootstrap/dist/css/bootstrap.min.css';
-import "./style.css"
-import { Provider } from 'react-redux'
-import store from '../redux/store/store'
+import "bootstrap/dist/css/bootstrap.min.css";
+import "./style.css";
+import { useState } from "react";
 
 function MyApp({ Component, pageProps }) {
-    return (
-        <Provider store={store}>
-            <Component {...pageProps} />
-        </Provider>
-    )
+  const [resumes, setResumes] = useState([]);
+
+  const addResume = (newResume) => {
+    setResumes([...resumes, newResume]);
+  };
+
+  return <Component resumes={resumes} addResume={addResume} {...pageProps} />;
 }
 
-export default MyApp
+export default MyApp;

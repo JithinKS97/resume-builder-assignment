@@ -14,10 +14,8 @@ class SkillList extends React.Component {
     super(props);
 
     this.state = {
-      tags: [
-
-      ],
-      suggestions: skills.map(skill=>({ id:skill, text:skill })),
+      tags: [],
+      suggestions: skills.map((skill) => ({ id: skill, text: skill })),
     };
     this.handleDrag = this.handleDrag.bind(this);
   }
@@ -36,21 +34,19 @@ class SkillList extends React.Component {
     const { suggestions } = this.state;
     const { tags, onDelete, onAdd } = this.props;
     return (
-      <div className="skill-list-container">
-        <Card>
-          <CardBody>
-            <ReactTags
-              tags={tags}
-              suggestions={suggestions}
-              handleDelete={onDelete}
-              handleAddition={onAdd}
-              handleDrag={this.handleDrag}
-              delimiters={delimiters}
-              placeholder="Type a skill and press enter"
-            />
-          </CardBody>
-        </Card>
-      </div>
+      <Card>
+        <CardBody>
+          <ReactTags
+            tags={tags}
+            suggestions={suggestions}
+            handleDelete={onDelete}
+            handleAddition={onAdd}
+            handleDrag={this.handleDrag}
+            delimiters={delimiters}
+            placeholder="Type a skill and press enter"
+          />
+        </CardBody>
+      </Card>
     );
   }
 }
@@ -58,12 +54,12 @@ class SkillList extends React.Component {
 export default SkillList;
 
 const skills = [
-    "Java",
-    "Javascript",
-    "Php",
-    "React",
-    "Vue",
-    "Angular",
-    "Svelte",
-    "c#"
-]
+  "Java",
+  "Javascript",
+  "Php",
+  "React",
+  "Vue",
+  "Angular",
+  "Svelte",
+  "c#",
+];

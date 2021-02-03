@@ -2,8 +2,11 @@ import PersonalInfo from "./PersonalInfo";
 import EducationExperienceList from "./EducationExperienceList";
 import { useState } from "react";
 import SkillsList from './SkillList';
+import { Button } from "reactstrap"
+import Link from 'next/link'
 
-export default () => {
+export default (props) => {
+  const { addResume } = props;
   const [personalInfo, setPersonalInfo] = useState(defaultInfo);
   const [educationExperienceList, setEducationExperienceList] = useState(defaultEducationExperienceList);
   const [skills, setSkills] = useState([])
@@ -62,6 +65,19 @@ export default () => {
     )
   }
 
+  const handleSubmit = () => {
+    const title = window.prompt("Enter a title")
+    if(title) {
+      addResume({
+        title,
+        personalInfo,
+        educationExperienceList,
+        skills
+      })
+      alert("Resume added")
+    }
+  }
+
   return (
     <>
       <style>{style}</style>
@@ -81,16 +97,15 @@ export default () => {
           onDelete={handleSkillDelete}
           tags={skills}
         />
+        <Button onClick={handleSubmit} className="submit-button" color="primary">Submit Resume</Button>
       </div>
     </>
   );
 };
 
 const style = `
-  .resume-builder-container {
-    width:50vw;
-    margin:auto;
-    margin-top:20px;
+  input[type="text"]:focus, input[type="password"]:focus{
+    border:2px solid #50C878;
   }
   .education-experience-container {
     display:flex;
@@ -123,6 +138,11 @@ const style = `
   }
   .tag-wrapper.ReactTags__tag {
     margin-bottom:10px !important;
+  }
+  .submit-button {
+    float:right;
+    margin-top:20px;
+    margin-bottom:50px;
   }
 `;
 
