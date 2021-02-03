@@ -1,28 +1,31 @@
 import PersonalInfo from "./PersonalInfo";
 import EducationExperienceList from "./EducationExperienceList";
 import { useState } from "react";
-import SkillsList from './SkillList';
-import { Button } from "reactstrap"
-import { useEffect } from "react"
+import SkillsList from "./SkillList";
+import { Button } from "reactstrap";
+import { useEffect } from "react";
+import { useRouter } from "next/router"
 
 export default (props) => {
-  const { addResume, resume, index, updateResume} = props;
+  const { addResume, resume, index, updateResume } = props;
   const [personalInfo, setPersonalInfo] = useState(defaultInfo);
-  const [educationExperienceList, setEducationExperienceList] = useState(defaultEducationExperienceList);
-  const [skills, setSkills] = useState([])
+  const [educationExperienceList, setEducationExperienceList] = useState(
+    defaultEducationExperienceList
+  );
+  const [skills, setSkills] = useState([]);
+  const router = useRouter();
 
-  useEffect(()=>{
-    if(resume) {
-      setPersonalInfo(resume.personalInfo)
-      setEducationExperienceList(resume.educationExperienceList)
-      setSkills(resume.skills)
+  useEffect(() => {
+    if (resume) {
+      setPersonalInfo(resume.personalInfo);
+      setEducationExperienceList(resume.educationExperienceList);
+      setSkills(resume.skills);
     } else {
-      console.log("reset to defaults")
-      setPersonalInfo(defaultInfo)
-      setEducationExperienceList(defaultEducationExperienceList)
-      setSkills([])
+      setPersonalInfo(defaultInfo);
+      setEducationExperienceList(defaultEducationExperienceList);
+      setSkills([]);
     }
-  }, [resume])
+  }, [resume]);
 
   const handlePersonalInfoChange = (field, value) => {
     const updatedInfo = {
@@ -40,107 +43,113 @@ export default (props) => {
   };
 
   const handleExperienceEducationChange = (index, field, value) => {
-    let valueToUpdate = educationExperienceList[index]
+    let valueToUpdate = educationExperienceList[index];
     const updatedValue = {
       ...valueToUpdate,
-      [field]:value
-    }
-    setEducationExperienceList(
-      [
-        ...educationExperienceList.slice(0,index),
-        updatedValue,
-        ...educationExperienceList.slice(index+1)
-      ]
-    )
-  }
+      [field]: value,
+    };
+    setEducationExperienceList([
+      ...educationExperienceList.slice(0, index),
+      updatedValue,
+      ...educationExperienceList.slice(index + 1),
+    ]);
+  };
 
   const handleExperienceEducationDelete = (index) => {
-    if(educationExperienceList.length===1) {
+    if (educationExperienceList.length === 1) {
       return;
     }
-    setEducationExperienceList(
-      [
-        ...educationExperienceList.slice(0,index),
-        ...educationExperienceList.slice(index+1)
-      ]
-    )
-  }
+    setEducationExperienceList([
+      ...educationExperienceList.slice(0, index),
+      ...educationExperienceList.slice(index + 1),
+    ]);
+  };
 
   const handleSkillDelete = (i) => {
-    setSkills(
-      skills.filter((_tag, index) => index !== i)
-    )
-  }
+    setSkills(skills.filter((_tag, index) => index !== i));
+  };
 
   const handleSkillAdd = (tag) => {
-    setSkills(
-      [...skills, tag]
-    )
-  }
+    setSkills([...skills, tag]);
+  };
 
   const validate = () => {
-    const validations = []
-    if(!personalInfo.name) {
-      validations.push("Name should not be empty")
+    const validations = [];
+    if (!personalInfo.name) {
+      validations.push("Name should not be empty");
     }
-    if(!personalInfo.email) {
-      validations.push("Email should not be empty")
+    if (!personalInfo.email) {
+      validations.push("Email should not be empty");
     }
-    if(!personalInfo.address) {
-      validations.push("Address should not be empty")
+    if (!personalInfo.address) {
+      validations.push("Address should not be empty");
     }
-    if(!personalInfo.phonenumber) {
-      validations.push("Phone number should not be empty")
-    }
-   
-    if(educationExperienceList.every(educationExperience=>{
-      return educationExperience.company_institute === "" && educationExperience.year =="" && educationExperience.designation_degree == ""
-    })) {
-      validations.push("Education / experience information not filled")
+    if (!personalInfo.phonenumber) {
+      validations.push("Phone number should not be empty");
     }
 
-    if(skills.length===0) {
-      validations.push("Add atleast one skill")
+    if (
+      !educationExperienceList.some((educationExperience) => {
+        return (
+          educationExperience.company_institute !== "" &&
+          educationExperience.year !== "" &&
+          educationExperience.designation_degree !== ""
+        );
+      })
+    ) {
+      validations.push("Education / experience information not filled");
     }
-   
-    if(validations.length===0) {
+
+    if (skills.length === 0) {
+      validations.push("Add atleast one skill");
+    }
+
+    if (validations.length === 0) {
       return true;
     } else {
       alert(validations.join("\n"));
     }
-  }
+  };
 
   const handleSubmit = () => {
-    if(!validate()) {
+    if (!validate()) {
       return;
     }
-    if(index !== null) {
-      updateResume({
-        personalInfo,
-        educationExperienceList,
-        skills
-      }, index)
-      alert("Resume updated")
+    if (index !== null) {
+      updateResume(
+        {
+          personalInfo,
+          educationExperienceList,
+          skills,
+        },
+        index
+      );
+      alert("Resume updated");
+      router.push("/list")
       return;
     }
-    const title = window.prompt("Enter a title for resume")
-    if(title) {
+    const title = window.prompt("Enter a title for resume");
+    if (title) {
       addResume({
         title,
         personalInfo,
         educationExperienceList,
-        skills
-      })
-      alert("Resume added")
+        skills,
+      });
+      alert("Resume added");
+      router.push("/list")
     }
-  }
+  };
 
   return (
     <>
       <style>{style}</style>
       <div className="resume-builder-container">
         <h2>Personal information</h2>
-        <PersonalInfo personalInfo={personalInfo} onChange={handlePersonalInfoChange} />
+        <PersonalInfo
+          personalInfo={personalInfo}
+          onChange={handlePersonalInfoChange}
+        />
         <h2 className="title">Experience / education</h2>
         <EducationExperienceList
           educationExperienceList={educationExperienceList}
@@ -148,14 +157,18 @@ export default (props) => {
           onChange={handleExperienceEducationChange}
           onDelete={handleExperienceEducationDelete}
         />
-         <h2 className="title">Skills</h2>
+        <h2 className="title">Skills</h2>
         <SkillsList
           onAdd={handleSkillAdd}
           onDelete={handleSkillDelete}
           tags={skills}
         />
-        <Button onClick={handleSubmit} className="submit-button" color="primary">
-          {index!==null?"Save Resume":"Submit Resume"}
+        <Button
+          onClick={handleSubmit}
+          className="submit-button"
+          color="primary"
+        >
+          {index !== null ? "Save Resume" : "Submit Resume"}
         </Button>
       </div>
     </>
@@ -210,5 +223,5 @@ const defaultInfo = {
 };
 
 const defaultEducationExperienceList = [
-  { company_institute: "", year: "", designation_degree: "" }
-]
+  { company_institute: "", year: "", designation_degree: "" },
+];
