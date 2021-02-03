@@ -34,7 +34,7 @@ class SkillList extends React.Component {
     const { suggestions } = this.state;
     const { tags, onDelete, onAdd } = this.props;
     return (
-      <Card>
+      <Card className="skill-list-container">
         <CardBody>
           <ReactTags
             tags={tags}
