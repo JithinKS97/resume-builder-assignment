@@ -123,7 +123,7 @@ export default (props) => {
       alert("Resume updated")
       return;
     }
-    const title = window.prompt("Enter a title")
+    const title = window.prompt("Enter a title for resume")
     if(title) {
       addResume({
         title,
@@ -188,9 +188,6 @@ const style = `
   .education-experience-container input {
     width:90%;
   }
-  .skill-list-container {
-    margin-bottom:100px;
-  }
   .skill-list-container input {
     padding:15px;
     outline: 0px none;
@@ -200,7 +197,7 @@ const style = `
   }
   .submit-button {
     float:right;
-    margin-top:20px;
+    margin-top:80px;
     margin-bottom:50px;
   }
 `;
