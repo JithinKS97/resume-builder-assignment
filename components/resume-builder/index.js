@@ -78,7 +78,42 @@ export default (props) => {
     )
   }
 
+  const validate = () => {
+    const validations = []
+    if(!personalInfo.name) {
+      validations.push("Name should not be empty")
+    }
+    if(!personalInfo.email) {
+      validations.push("Email should not be empty")
+    }
+    if(!personalInfo.address) {
+      validations.push("Address should not be empty")
+    }
+    if(!personalInfo.phonenumber) {
+      validations.push("Phone number should not be empty")
+    }
+   
+    if(educationExperienceList.every(educationExperience=>{
+      return educationExperience.company_institute === "" && educationExperience.year =="" && educationExperience.designation_degree == ""
+    })) {
+      validations.push("Education / experience information not filled")
+    }
+
+    if(skills.length===0) {
+      validations.push("Add atleast one skill")
+    }
+   
+    if(validations.length===0) {
+      return true;
+    } else {
+      alert(validations.join("\n"));
+    }
+  }
+
   const handleSubmit = () => {
+    if(!validate()) {
+      return;
+    }
     if(index !== null) {
       updateResume({
         personalInfo,
