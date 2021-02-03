@@ -4,11 +4,10 @@ export default () => {
     return (
         <>
             <style>{style}</style>
-            <div className=".navbar-container ">
+            <div className="navbar-container ">
                 <Link href="/">
                     Resume builder
                 </Link>
-                <span>{"   |   "}</span>
                 <Link href="/list">
                     List resumes
                 </Link>
@@ -21,5 +20,8 @@ const style = `
     .navbar-container {
        display:flex;
        flex-direction:row;
+    }
+    .navbar-container a {
+        margin-right:10px;
     }
 `

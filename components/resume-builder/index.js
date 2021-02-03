@@ -3,13 +3,28 @@ import EducationExperienceList from "./EducationExperienceList";
 import { useState } from "react";
 import SkillsList from './SkillList';
 import { Button } from "reactstrap"
-import Link from 'next/link'
+import { useEffect } from "react"
 
 export default (props) => {
-  const { addResume } = props;
+  const { addResume, resume, index, updateResume} = props;
   const [personalInfo, setPersonalInfo] = useState(defaultInfo);
   const [educationExperienceList, setEducationExperienceList] = useState(defaultEducationExperienceList);
   const [skills, setSkills] = useState([])
+
+  useEffect(()=>{
+    console.log("asdads")
+    console.log(resume)
+    if(resume) {
+      setPersonalInfo(resume.personalInfo)
+      setEducationExperienceList(resume.educationExperienceList)
+      setSkills(resume.skills)
+    } else {
+      console.log("reset to defaults")
+      setPersonalInfo(defaultInfo)
+      setEducationExperienceList(defaultEducationExperienceList)
+      setSkills([])
+    }
+  }, [resume])
 
   const handlePersonalInfoChange = (field, value) => {
     const updatedInfo = {
@@ -66,6 +81,15 @@ export default (props) => {
   }
 
   const handleSubmit = () => {
+    if(index !== null) {
+      updateResume({
+        personalInfo,
+        educationExperienceList,
+        skills
+      }, index)
+      alert("Resume updated")
+      return;
+    }
     const title = window.prompt("Enter a title")
     if(title) {
       addResume({
@@ -97,7 +121,9 @@ export default (props) => {
           onDelete={handleSkillDelete}
           tags={skills}
         />
-        <Button onClick={handleSubmit} className="submit-button" color="primary">Submit Resume</Button>
+        <Button onClick={handleSubmit} className="submit-button" color="primary">
+          {index!==null?"Save Resume":"Submit Resume"}
+        </Button>
       </div>
     </>
   );

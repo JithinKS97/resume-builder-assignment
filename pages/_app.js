@@ -9,7 +9,26 @@ function MyApp({ Component, pageProps }) {
     setResumes([...resumes, newResume]);
   };
 
-  return <Component resumes={resumes} addResume={addResume} {...pageProps} />;
+  const updateResume = (savedResume, index) => {
+    const updatedResume  = {
+        ...resumes[index],
+        ...savedResume
+    }
+    setResumes([
+      ...resumes.slice(0, index),
+      updatedResume,
+      ...resumes.slice(index + 1),
+    ]);
+  };
+
+  return (
+    <Component
+      updateResume={updateResume}
+      resumes={resumes}
+      addResume={addResume}
+      {...pageProps}
+    />
+  );
 }
 
 export default MyApp;
