@@ -1,29 +1,34 @@
-import Layout from "../components/layout/index"
-import { Card, CardBody, Button } from "reactstrap"
+import Layout from "../components/layout/index";
+import { Card, CardBody, Button } from "reactstrap";
 
 export default (props) => {
-    const { resumes } = props;
-    return (
-        <>
-        <style>{style}</style>
-            <Layout>
-                {[{ title:"title" }].map(resume=>(
-                    <Card>
-                        <CardBody className="list">
-                            <div>
-                                {resume.title}
-                            </div>
-                            <div>
-                                <Button>Edit</Button>
-                                <Button color="danger" className="delete-button">X</Button>
-                            </div>
-                        </CardBody>
-                    </Card>
-                ))}
-            </Layout>
-        </>
-    )
-}
+  const { resumes } = props;
+
+  const handleEditClick = () => {
+    
+  }
+
+  return (
+    <>
+      <style>{style}</style>
+      <Layout>
+        {resumes.map((resume, index) => (
+          <Card>
+            <CardBody className="list">
+              <div>{resume.title}</div>
+              <div>
+                <Button>Edit</Button>
+                <Button color="danger" className="delete-button">
+                  X
+                </Button>
+              </div>
+            </CardBody>
+          </Card>
+        ))}
+      </Layout>
+    </>
+  );
+};
 
 const style = `
     .list {
@@ -34,4 +39,4 @@ const style = `
     .delete-button {
         margin-left:10px;
     }
-`
+`;

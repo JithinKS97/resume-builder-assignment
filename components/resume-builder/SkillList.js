@@ -44,6 +44,7 @@ class SkillList extends React.Component {
             handleDrag={this.handleDrag}
             delimiters={delimiters}
             placeholder="Type a skill and press enter"
+            autofocus={false}
           />
         </CardBody>
       </Card>
