@@ -1,11 +1,15 @@
-import { FormGroup, Label, Input, Card, CardBody } from "reactstrap";
+import { FormGroup, Label, Input, Card, CardBody, Button } from "reactstrap";
 
 export default (props) => {
-  const { index, onChange, educationExperience } = props;
+  const { index, onChange, educationExperience, onDelete } = props;
 
   const handleFieldChange = (e) => {
     onChange(index, e.target.name, e.target.value);
   };
+
+  const handleDelete = () => {
+    onDelete(index)
+  }
 
   const { company_institute, year, designation_degree } = educationExperience;
 
@@ -36,7 +40,11 @@ export default (props) => {
             </FormGroup>
           </div>
         </CardBody>
+        <div className='delete-button'>
+          <Button onClick={handleDelete} color="danger" size="sm">X</Button>
+        </div>
       </Card>
+      
     </>
   );
 };
