@@ -1,4 +1,4 @@
-import ResumeBuilder from "../components/ResumeBuilder"
+import ResumeBuilder from "../components/resume-builder"
 
 export default () => {
     return (
