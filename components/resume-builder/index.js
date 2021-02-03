@@ -1,13 +1,24 @@
 import PersonalInfo from "./PersonalInfo";
 import ExperienceList from "./ExperienceList";
+import { useState } from "react";
 
 export default () => {
 
-  const personalInfo = {
-    name:"Jithin",
-    email:"jithin.ks@gmail.com",
-    address:"adddress",
-    phonenumber:"phonenumber"
+  const defaultInfo = {
+    name:"",
+    email:"",
+    address:"",
+    phonenumber:""
+  }
+  
+  const [personalInfo, setPersonalInfo] = useState(defaultInfo)
+
+  const handleChange = (field, value) => {
+    const updatedInfo = {
+      ...personalInfo,
+      [field]:value
+    }
+    setPersonalInfo(updatedInfo)
   }
 
   return (
@@ -16,6 +27,7 @@ export default () => {
       <div className="resume-builder-container">
         <PersonalInfo
           personalInfo={personalInfo}
+          onChange={handleChange}
         />
         <ExperienceList />
       </div>

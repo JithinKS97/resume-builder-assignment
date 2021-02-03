@@ -1,31 +1,50 @@
 import { FormGroup, Label, Input } from "reactstrap";
 
 export default (props) => {
+  const { personalInfo, onChange } = props;
+  const { name, email, address, phonenumber } = personalInfo;
 
-  const { personalInfo } = props;
-  const { name, email, address, phonenumber } = personalInfo
-
-  const handleNameChange = () => {
-    
+  const handleFieldChange = (e) => {
+    onChange(e.target.name, e.target.value)
   }
 
   return (
     <>
       <FormGroup>
         <Label for="exampleEmail">Name</Label>
-        <Input onChange={handleNameChange} value={name} type="text" />
+        <Input
+          onChange={handleFieldChange}
+          name="name"
+          type="text"
+          value={name}
+        />
       </FormGroup>
       <FormGroup>
         <Label for="exampleEmail">Email</Label>
-        <Input value={email} type="email" />
+        <Input
+          onChange={handleFieldChange}
+          value="email"
+          value={email}
+          type="email"
+        />
       </FormGroup>
       <FormGroup>
         <Label placeholder="Address">Address</Label>
-        <Input value={address} type="textarea" />
+        <Input
+          onChange={handleFieldChange}
+          address="address"
+          value={address}
+          type="textarea"
+        />
       </FormGroup>
       <FormGroup>
         <Label for="exampleEmail">Phone number</Label>
-        <Input value={phonenumber} type="text" />
+        <Input
+          onChange={handleFieldChange}
+          name="phonenumber"
+          value={phonenumber}
+          type="text"
+        />
       </FormGroup>
     </>
   );
