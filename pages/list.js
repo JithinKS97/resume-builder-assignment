@@ -3,7 +3,7 @@ import { Card, CardBody, Button } from "reactstrap";
 import { useRouter } from "next/router"
 
 export default (props) => {
-  const { resumes } = props;
+  const { resumes, handleDelete } = props;
   const router = useRouter();
 
   const handleEditClick = (index) => {
@@ -26,7 +26,7 @@ export default (props) => {
               <div>
                 <Button onClick={()=>handleViewClick(index)}>View</Button>
                 <Button className="button" onClick={()=>handleEditClick(index)}>Edit</Button>
-                <Button color="danger" className="button">
+                <Button onClick={()=>handleDelete(index)} color="danger" className="button">
                   X
                 </Button>
               </div>

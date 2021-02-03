@@ -21,12 +21,20 @@ function MyApp({ Component, pageProps }) {
     ]);
   };
 
+  const handleDelete = (index) => {
+    setResumes([
+      ...resumes.slice(0, index),
+      ...resumes.slice(index + 1),
+    ]);
+  }
+
   return (
     <Component
       updateResume={updateResume}
       resumes={resumes}
       addResume={addResume}
       {...pageProps}
+      handleDelete={handleDelete}
     />
   );
 }
