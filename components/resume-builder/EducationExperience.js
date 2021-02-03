@@ -1,13 +1,13 @@
 import { FormGroup, Label, Input, Card, CardBody } from "reactstrap";
 
 export default (props) => {
-  const { index, onChange, educationExperince } = props;
+  const { index, onChange, educationExperience } = props;
 
   const handleFieldChange = (e) => {
     onChange(index, e.target.name, e.target.value);
   };
 
-  const { company_institute, year, designation_degree } = educationExperince;
+  const { company_institute, year, designation_degree } = educationExperience;
 
   return (
     <>
@@ -24,12 +24,12 @@ export default (props) => {
             </FormGroup>
             <FormGroup>
               <Label>Year</Label>
-              <Input year={year} onChange={handleFieldChange} name="year" />
+              <Input value={year} onChange={handleFieldChange} name="year" />
             </FormGroup>
             <FormGroup>
               <Label>Designation/Degree</Label>
               <Input
-                designation_degree={designation_degree}
+                value={designation_degree}
                 onChange={handleFieldChange}
                 name="designation_degree"
               />

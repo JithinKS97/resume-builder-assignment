@@ -22,7 +22,18 @@ export default () => {
   };
 
   const handleExperienceEducationChange = (index, field, value) => {
-    console.log(index, field, value)
+    let valueToUpdate = educationExperienceList[index]
+    const updatedValue = {
+      ...valueToUpdate,
+      [field]:value
+    }
+    setEducationExperienceList(
+      [
+        ...educationExperienceList.slice(0,index),
+        updatedValue,
+        ...educationExperienceList.slice(index+1)
+      ]
+    )
   }
 
   return (
