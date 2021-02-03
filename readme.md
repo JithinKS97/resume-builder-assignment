@@ -1,3 +1,9 @@
+## Resume builder assignment
+
+### Preview
+
+<img align="center" src="https://gifyu.com/image/UDO6">
+
 ### Instructions for running in local
 
 1. Should have node and npm preinstalled
