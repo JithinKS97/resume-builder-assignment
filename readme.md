@@ -7,6 +7,7 @@
 ### Instructions for running in local
 
 1. Should have node and npm preinstalled
-2. From the root directory, execute npm install
-3. Execute npm run dev
-4. Application will start running at localhost:3000
+2. Clone the repo
+3. From the root directory, do `npm install`
+4. Run the command `npm run dev`
+4. Application will start running at `localhost:3000`
