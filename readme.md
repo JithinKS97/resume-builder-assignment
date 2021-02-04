@@ -2,7 +2,7 @@
 
 ### Preview
 
-<img align="center" src="https://s2.gifyu.com/images/Peek-2021-02-04-02-55.gif">
+<img align="center" src="https://s2.gifyu.com/images/Peek-2021-02-04-07-56187da594820e7e0e.gif">
 
 ### Instructions for running in local
 
