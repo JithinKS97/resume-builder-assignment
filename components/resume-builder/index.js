@@ -125,20 +125,19 @@ export default (props) => {
         index
       );
       alert("Resume updated");
-      router.push("/list")
-      return;
+    } else {
+      const title = window.prompt("Enter a title for resume");
+      if (title) {
+        addResume({
+          title,
+          personalInfo,
+          educationExperienceList,
+          skills,
+        });
+        alert("Resume added");
+      }
     }
-    const title = window.prompt("Enter a title for resume");
-    if (title) {
-      addResume({
-        title,
-        personalInfo,
-        educationExperienceList,
-        skills,
-      });
-      alert("Resume added");
-      router.push("/list")
-    }
+    router.push("/list")
   };
 
   return (
